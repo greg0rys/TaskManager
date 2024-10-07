@@ -17,6 +17,7 @@ public class TaskDB implements Database
     public boolean addTask(Task task) throws SQLException
     {
 
+        //test
         if (RECORDS.containsKey(task.getPriority()))
         {
             RECORDS.get(task.getPriority()).add(task);
