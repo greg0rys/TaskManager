@@ -36,7 +36,7 @@ public class TaskDB implements Database
     {
         if(T == null) return false;
 
-        try(Connection conn = getConnection())
+        try(Connection conn = getConnection(Tasks))
         {
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM TEMP");
         }
@@ -75,7 +75,7 @@ public class TaskDB implements Database
         return RECORDS;
     }
     @Override
-    public Optional<Connection> getConnection()
+    public Optional<Connection> getConnection(String tableName)
     {
         Optional<Connection> conn = Optional.empty();
 
