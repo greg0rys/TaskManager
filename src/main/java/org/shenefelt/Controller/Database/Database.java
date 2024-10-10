@@ -18,7 +18,7 @@ public interface Database
     public int getNumRecords();
 
     public boolean insertData();
-    public Map<Integer,Database> getAllRecords();
+    public Map<Integer,Database> getAllRecords() throws SQLException;
 
 
 }

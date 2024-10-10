@@ -17,7 +17,7 @@ public class DatabaseManager implements Database
     private final static String URL = DatabaseConfig.getUrl();
     private final static String USERNAME = DatabaseConfig.getUsername();
     private final static String PASSWORD = DatabaseConfig.getPassword();
-    private final List<Map<Integer, Database>> TABLE_DATA = new ArrayList<>();
+    private final Map<Integer,Database> TABLE_DATA = new HashMap<>();
     private String tableName =" ";
 
 
@@ -25,13 +25,15 @@ public class DatabaseManager implements Database
 
     public boolean load()
     {
-        if
+        TABLE_DATA.putAll(getAllRecords());
+        return TABLE_DATA.isEmpty();
     }
     public static class Builder()
     {
         public static boolean insertIntoTableByID(int id) throws Exception
         {
             Optional<Connection> conn = Database.getConnection(URL,USERNAME,PASSWORD);
+
             if(conn.isEmpty()) return false;
 
             switch(id)
@@ -41,6 +43,8 @@ public class DatabaseManager implements Database
 
             return false;
         }
+
+        public static void insertMap() { }
     }
 
     @Override
@@ -56,8 +60,9 @@ public class DatabaseManager implements Database
     }
 
     @Override
-    public Map<Integer, Database> getAllRecords()
-    {
+    public Map<Integer, Database> getAllRecords() throws SQLException {
+        // we will connect create 3x database instances
+        Database t = new DatabaseManager();
         return new HashMap<>();
     }
 }
