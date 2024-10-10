@@ -1,6 +1,5 @@
 package org.shenefelt.Controller.Database;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class TableFactory
     {
         return switch (tName) {
             case "Tasks" -> new TaskDB();
-            case "Users" -> new UserDB(DB_URLS.get(1));
+            case "Users" -> new UserRepoWorker(DB_URLS.get(1));
             default -> throw new IllegalArgumentException("Invalid table name: " + tName);
         };
     }
