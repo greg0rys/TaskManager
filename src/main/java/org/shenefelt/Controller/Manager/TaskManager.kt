@@ -1,6 +1,7 @@
 package org.shenefelt.Controller.Manager;
 
 import org.shenefelt.Controller.Repository.TaskRepo
+import org.shenefelt.Model.Task
 import kotlin.collections.ArrayList
 
 class TaskManager {

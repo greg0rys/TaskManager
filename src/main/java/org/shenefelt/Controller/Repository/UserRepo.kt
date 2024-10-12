@@ -31,11 +31,11 @@ class UserRepo {
     }
 
     @Throws(Exception::class)
-    fun getAllUsersAuthInfo(): List<User>
+    fun getAllUsersAuthInfo(): ArrayList<User>
     {
         val connection: Optional<Connection> = DBConnectionManager.getConnection()
 
-        if (connection.isEmpty) return emptyList()
+        if (connection.isEmpty) return ArrayList()
 
         val userInfo = ArrayList<User>()
 

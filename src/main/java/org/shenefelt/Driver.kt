@@ -7,11 +7,13 @@ import org.shenefelt.Controller.Repository.UserRepo
 import org.shenefelt.Helpers.InputCollector
 import org.shenefelt.Model.User
 
+import kotlin.collections.ArrayList
+
 // Drives the program and menus
 class Driver @Throws(Exception::class) constructor() {
-    private var storedHashedPassword: String = ""
+    private var storedHashedPassword: String? = ""
     private var currentUser: User? = null
-    private val usersInfo: MutableMap<String, String> = mutableMapOf()
+    private val usersInfo: ArrayList<User> = ArrayList()
 
 
     private val userManager: UserManager = UserManager()
@@ -19,7 +21,8 @@ class Driver @Throws(Exception::class) constructor() {
     private val userRepo: UserRepo = UserRepo()
 
     init {
-        userRepo.getAllUsersAuthInfo(usersInfo)
+
+        usersInfo.addAll(userRepo.getAllUsersAuthInfo())
         login()
     }
 
@@ -27,9 +30,10 @@ class Driver @Throws(Exception::class) constructor() {
         if (usersInfo.isEmpty()) return
 
         val temp = InputCollector.collectUserInfo()
-        storedHashedPassword = usersInfo[temp.username] ?: ""
+        storedHashedPassword = usersInfo[temp.id].password
 
-        if (storedHashedPassword.isEmpty()) {
+        if (storedHashedPassword?.isEmpty()!!)
+        {
             println("Login failed { Username Not Found! } Please try again!")
             login()
             return
@@ -48,7 +52,6 @@ class Driver @Throws(Exception::class) constructor() {
     private fun mainMenu() {
         println("Main Menu\n")
         println("Welcome ${currentUser?.username} ")
-        // Give admin menu if isAdmin()
         println("1. Task Menu")
         println("2. Exit")
 
@@ -71,9 +74,5 @@ class Driver @Throws(Exception::class) constructor() {
     }
 
 
-    private fun adminMenu(U: User)
-    {
-
-    }
 
 }

@@ -9,19 +9,19 @@ class User {
     var lName: String? = ""
     var password: String? = ""
     var username: String? = ""
-    var isNull: Boolean = true
     var isAdmin: Boolean = false
     var tasks: Map<Int, Task> = HashMap() // tasks sorted by priority
+    var isLoggedIn: Boolean = false
 
     // Default constructor
     constructor() {
-        isNull = true
         isAdmin = false
     }
 
 
     // Copy constructor
-    constructor(user: User) {
+    constructor(user: User)
+    {
         id = user.id
         numberOfTasks = user.numberOfTasks
         numberOfCompletedTasks = user.numberOfCompletedTasks
@@ -30,7 +30,6 @@ class User {
         lName = user.lName
         password = user.password
         username = user.username
-        isNull = user.isNull
         isAdmin = user.isAdmin
         tasks = HashMap(user.tasks)
     }
@@ -39,7 +38,7 @@ class User {
     constructor(
         dbID: Int, numTasks: Int, numCompletedTasks: Int,
         numOverdueTasks: Int, first: String?, last: String?,
-        uName: String?, pass: String?, noValue: Boolean
+        uName: String?, pass: String?
     ) {
         id = dbID
         numberOfTasks = numTasks
@@ -49,11 +48,11 @@ class User {
         lName = last
         username = uName
         password = pass
-        isNull = noValue
     }
 
     // Constructor with username and password
-    constructor(username: String?, password: String?) {
+    constructor(username: String?, password: String?)
+    {
         this.username = username
         this.password = password
     }
@@ -62,7 +61,7 @@ class User {
         return "$fName $lName"
     }
 
-    fun getUserName(): String
+    fun getUsername(): String
     {
         return "$fName[0].$lName"
     }
@@ -72,8 +71,9 @@ class User {
         return "$fName[0].$lName@shenefelt.net"
     }
 
+
     override fun toString(): String
     {
-        return if (isNull) "null" else "User { Name=${ getFullName() } Email=${ getEmail() } }"
+        return "User { Name=${ getFullName() } Email=${ getEmail() } Username=${ getUsername() }}"
     }
 }

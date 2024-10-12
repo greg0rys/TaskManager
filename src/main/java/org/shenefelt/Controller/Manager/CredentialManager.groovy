@@ -19,7 +19,7 @@ class CredentialManager
     }
 
 
-    static List<String> getConnectionLogons() throws Exception {
+     static List<String> getConnectionLogons() throws Exception {
         if (!loaded) {
             loadProps()
         }
