@@ -11,7 +11,7 @@ class CredentialManager
     private CredentialManager() { }
 
     static String hashPass(String pass) {
-        return BCrypt.hashpw(pass, BCrypt.gensalt(150))
+        return BCrypt.hashpw(pass, BCrypt.gensalt(12))
     }
 
     static boolean checkPass(String pass, String hash) {
