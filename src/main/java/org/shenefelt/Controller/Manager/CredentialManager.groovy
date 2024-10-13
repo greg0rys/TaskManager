@@ -11,19 +11,20 @@ class CredentialManager
     private CredentialManager() { }
 
     static String hashPass(String pass) {
-        return BCrypt.hashpw(pass, BCrypt.gensalt(12))
+         BCrypt.hashpw(pass, BCrypt.gensalt(12))
     }
 
     static boolean checkPass(String pass, String hash) {
-        return BCrypt.checkpw(pass, hash)
+         BCrypt.checkpw(pass, hash)
     }
 
 
      static List<String> getConnectionLogons() throws Exception {
-        if (!loaded) {
+        if (!loaded)
             loadProps()
-        }
-        return List.of(url, username, password)
+
+         // implicit return
+        List.of(url, username, password)
     }
 
     /**
@@ -43,4 +44,9 @@ class CredentialManager
             input.close()
         }
     }
+
+    // groovy implicitly returns the last statement so no need to use the 'return' keyword
+    static  getUrl()     { if(!loaded) loadProps(); url}
+    static getUsername() {  if(!loaded) loadProps(); username }
+    static getPassword() {  if(!loaded) loadProps(); password }
 }
